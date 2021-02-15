@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const booksRouter = require('./routes/tutorialsRouter');
 const statusCodes = require('./constants/statusCodes')
 
 const app = express();
 
+app.use(cors());
 // Parse incoming requests data
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
