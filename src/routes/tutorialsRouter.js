@@ -6,9 +6,10 @@ const statusCodes = require('../constants/statusCodes')
 // Get all tutorials
 router.route('/tutorials')
   .get(function(req, res, next) {
-      
-    dbConn.query('SELECT * FROM tutorials ORDER BY id desc',function(err, rows) {
+    const { title } = req.query;
 
+    if (title) {
+      dbConn.query(`SELECT * FROM tutorials WHERE title LIKE '%${title}%'`, function(err, rows) {
         if(err) {
           return res.status(statusCodes.BAD_REQUEST).send({
             statusCode: statusCodes.BAD_REQUEST,
@@ -24,7 +25,27 @@ router.route('/tutorials')
             tutorials: rows
           });
         }
-    });
+      });
+    } else {
+      dbConn.query('SELECT * FROM tutorials ORDER BY id desc',function(err, rows) {
+          if(err) {
+            return res.status(statusCodes.BAD_REQUEST).send({
+              statusCode: statusCodes.BAD_REQUEST,
+              success: false,
+              errors: {
+                message: err.message
+              }
+            }); 
+          } else {
+            return res.status(statusCodes.OK).send({
+              statusCode: statusCodes.OK,
+              success: true,
+              tutorials: rows
+            });
+          }
+      });
+    }
+      
   })
   .post(function(req, res, next) {    
     if(Object.keys(req.body).length === 0) {
