@@ -1,20 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-const booksRouter = require('./routes/tutorialsRouter');
+const express = require('express')
+const cors = require('cors')
+const booksRouter = require('./routes/tutorialsRouter')
 const statusCodes = require('./constants/statusCodes')
 
-const app = express();
+const app = express()
 
-app.use(cors());
+app.use(cors())
 // Parse incoming requests data
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
-app.use('/api', booksRouter);
+app.use('/api', booksRouter)
 
 app.get('/', (req, res) => res.status(200).send({
-  message: 'Api for tutorials',
-}));
+  message: 'Api for tutorials'
+}))
 
 // Return 404 for nonexistent routes
 app.use((req, res) => res.status(statusCodes.NOT_FOUND).send({
@@ -23,6 +23,6 @@ app.use((req, res) => res.status(statusCodes.NOT_FOUND).send({
   errors: {
     message: 'Route not found'
   }
-}));
+}))
 
-module.exports = app;
+module.exports = app
