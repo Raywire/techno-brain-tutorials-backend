@@ -90,7 +90,7 @@ router.route('/tutorials')
         return res.status(statusCodes.CREATED).send({
           statusCode: statusCodes.CREATED,
           success: true,
-          tutorial: result
+          tutorial: { id: result.insertId, ...form_data }
         });
       }
     })
@@ -180,7 +180,7 @@ router.route('/tutorials/:id')
         return res.status(statusCodes.OK).send({
           statusCode: statusCodes.OK,
           success: true,
-          tutorial: result
+          tutorial: { id, ...form_data }
         });
       }
     })
