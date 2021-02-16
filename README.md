@@ -1,3 +1,4 @@
+![Node.js CI](https://github.com/Raywire/techno-brain-tutorials-backend/workflows/Node.js%20CI/badge.svg)
 # techno-brain-tutorials-backend
 
 Project: Tutorials API
